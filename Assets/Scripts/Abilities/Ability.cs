@@ -3,7 +3,7 @@ using System.Collections;
 
 public abstract class Ability : MonoBehaviour
 {
-	public string key;
+	public string key = null;
 	public float rechargeDuration = 5.0f;
 	protected float _lastActivatedTime;
 

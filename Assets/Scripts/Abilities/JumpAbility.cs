@@ -7,18 +7,6 @@ public class JumpAbility : Ability
 	public int maxJumps = 1;
 	private uint _jumpCounter = 0;
 	
-	public void Update ()
-	{
-		if (rigidbody)
-		{
-			Vector3 velocity = rigidbody.velocity;
-			if (velocity.y == 0)
-			{
-				Landed();	
-			}
-		}
-	}
-	
 	private void Landed()
 	{
 		_jumpCounter = 0;
@@ -42,6 +30,14 @@ public class JumpAbility : Ability
 	override protected void OnActivate()
 	{
 		_jumpCounter++;
-		rigidbody.AddForce(new Vector3(0, jumpSpeed, 0));
+		rigidbody2D.AddForce(new Vector3(0, jumpSpeed, 0));
+	}
+
+	void OnCollisionEnter2D (Collision2D col)
+	{
+		if(IsJumping() && col.gameObject.tag == "floor")
+		{
+			Landed();
+		}
 	}
 }
